@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>todo</title>
+	<link href="https://fonts.googleapis.com/css?family=Zilla+Slab" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="checkbox.css">
+	<script defer src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+	<script defer src="app.js"></script>
+</head>
+
+<body ng-app="ToDo">
+	<div ng-controller="todoController" class="container">
+		<div class="mainContent">
+			<form name="newtodo" ng-submit="addTodo()" class="formContent">
+				<input class="todoInput" type="text" name="newtodo" ng-model="newTodo" required />
+				<button ng-disabled="frm.$invalid" class="addBtn">+</button>
+			</form>
+			<div class="completeBtns">
+				<button ng-click="clearCompleted()" class="clrCompleted">Clear Completed</button>
+				<button ng-click="toggleCompleted = !toggleCompleted" class="showCompleted">Show Completed</button>
+			</div>
+			<ul>
+				<li ng-hide="toggleCompleted" ng-repeat="todo in todos">
+					<div class="squaredFour">
+      					<input type="checkbox" value="None" id="squaredFour" name="check" ng-model="todo.done" />
+      					<label for="squaredFour"></label>
+    				</div>
+					<span ng-class="{'done': todo.done}">{{ todo.title }}</span>
+				</li>
+				<li ng-show="toggleCompleted" ng-repeat="item in completedTodos">
+					<div class="squaredFour">
+      					<input type="checkbox" value="None" id="squaredFour" name="check" ng-model="todo.done" />
+      					<label for="squaredFour"></label>
+    				</div>
+					<span ng-class="{'done': item.done}">{{ item.title }}</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
